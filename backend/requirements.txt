@@ -6,3 +6,4 @@ pandas
 tabulate
 pytest
 httpx
+python-dotenv
