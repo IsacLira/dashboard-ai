@@ -1,0 +1,164 @@
+{
+    "Row ID": {
+        "short description": "Identificador único para cada linha/transação.",
+        "dtype": "int64",
+        "samples": [
+            1,
+            2,
+            3
+        ]
+    },
+    "Order ID": {
+        "short description": "Identificador único do pedido/ordem de compra.",
+        "dtype": "object",
+        "samples": [
+            "CA-2017-152156",
+            "CA-2017-138688",
+            "US-2016-108966"
+        ]
+    },
+    "Order Date": {
+        "short description": "Data em que o pedido foi realizado.",
+        "dtype": "object",
+        "samples": [
+            "08/11/2017",
+            "12/06/2017",
+            "11/10/2016"
+        ]
+    },
+    "Ship Date": {
+        "short description": "Data em que o pedido foi enviado.",
+        "dtype": "object",
+        "samples": [
+            "11/11/2017",
+            "16/06/2017",
+            "18/10/2016"
+        ]
+    },
+    "Ship Mode": {
+        "short description": "Modo/Método de envio utilizado.",
+        "dtype": "object",
+        "samples": [
+            "Second Class",
+            "Standard Class",
+            "First Class"
+        ]
+    },
+    "Customer ID": {
+        "short description": "Identificador único do cliente.",
+        "dtype": "object",
+        "samples": [
+            "CG-12520",
+            "DV-13045",
+            "BH-11710"
+        ]
+    },
+    "Customer Name": {
+        "short description": "Nome completo do cliente.",
+        "dtype": "object",
+        "samples": [
+            "Claire Gute",
+            "Darrin Van Huff",
+            "Brosina Hoffman"
+        ]
+    },
+    "Segment": {
+        "short description": "Segmento de mercado do cliente (e.g., Consumer, Corporate, Home Office).",
+        "dtype": "object",
+        "samples": [
+            "Consumer",
+            "Corporate",
+            "Home Office"
+        ]
+    },
+    "Country": {
+        "short description": "País onde a transação ocorreu.",
+        "dtype": "object",
+        "samples": [
+            "United States",
+            "United States",
+            "United States"
+        ]
+    },
+    "City": {
+        "short description": "Cidade onde o pedido foi enviado.",
+        "dtype": "object",
+        "samples": [
+            "Henderson",
+            "Los Angeles",
+            "Fort Lauderdale"
+        ]
+    },
+    "State": {
+        "short description": "Estado/Região onde o pedido foi enviado.",
+        "dtype": "object",
+        "samples": [
+            "Kentucky",
+            "California",
+            "Florida"
+        ]
+    },
+    "Postal Code": {
+        "short description": "Código postal do endereço de envio.",
+        "dtype": "int64",
+        "samples": [
+            42420,
+            90036,
+            33311
+        ]
+    },
+    "Region": {
+        "short description": "Região geográfica ampla onde a transação ocorreu.",
+        "dtype": "object",
+        "samples": [
+            "South",
+            "West",
+            "East"
+        ]
+    },
+    "Product ID": {
+        "short description": "Identificador único do produto.",
+        "dtype": "object",
+        "samples": [
+            "FUR-BO-10001798",
+            "FUR-CH-10000454",
+            "OFF-LA-10000240"
+        ]
+    },
+    "Category": {
+        "short description": "Categoria principal do produto (e.g., Furniture, Office Supplies, Technology).",
+        "dtype": "object",
+        "samples": [
+            "Furniture",
+            "Office Supplies",
+            "Technology"
+        ]
+    },
+    "Sub-Category": {
+        "short description": "Subcategoria do produto.",
+        "dtype": "object",
+        "samples": [
+            "Bookcases",
+            "Chairs",
+            "Labels"
+        ]
+    },
+    "Product Name": {
+        "short description": "Nome detalhado do produto.",
+        "dtype": "object",
+        "samples": [
+            "Bush Somerset Collection Bookcase",
+            "Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back",
+            "Self-Adhesive Address Labels for Typewriters by Universal"
+        ]
+    },
+    "Sales": {
+        "short description": "Valor total de vendas para este item de linha.",
+        "dtype": "float64",
+        "samples": [
+            261.96,
+            731.94,
+            14.62
+        ]
+    }
+}
