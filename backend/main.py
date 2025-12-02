@@ -185,7 +185,7 @@ def get_dashboard_metrics():
         for idx, row in recent_orders.iterrows():
             activities.append(ActivityItem(
                 id=str(idx),
-                title=f"Pedido #{row['Order ID'][:8]}",
+                title=f"Order #{row['Order ID'][:8]}",
                 description=f"{row['Category']} - {row['Sub-Category']} (R$ {row['Sales']:.2f})",
                 timestamp=row['Order Date'].isoformat() if pd.notna(row['Order Date']) else datetime.now().isoformat(),
                 type="success"
@@ -195,7 +195,7 @@ def get_dashboard_metrics():
             metrics=[
                 MetricData(
                     id="1",
-                    label="Vendas Totais",
+                    label="Total Sales",
                     value=f"R$ {total_sales/1000:.1f}K",
                     change=round(sales_growth, 1),
                     trend="up" if sales_growth > 0 else "down",
@@ -203,7 +203,7 @@ def get_dashboard_metrics():
                 ),
                 MetricData(
                     id="2",
-                    label="Total de Clientes",
+                    label="Total of Customers",
                     value=total_customers,
                     change=round(customer_growth, 1),
                     trend="up" if customer_growth > 0 else "down",
@@ -211,7 +211,7 @@ def get_dashboard_metrics():
                 ),
                 MetricData(
                     id="3",
-                    label="Ticket Médio",
+                    label="Average Order Value",
                     value=f"R$ {avg_order_value:.2f}",
                     change=0,
                     trend="up",
@@ -219,7 +219,7 @@ def get_dashboard_metrics():
                 ),
                 MetricData(
                     id="4",
-                    label="Total de Pedidos",
+                    label="Total of Orders",
                     value=total_orders,
                     change=0,
                     trend="up",
@@ -245,7 +245,7 @@ def get_mock_dashboard_data():
         metrics=[
             MetricData(
                 id="1",
-                label="Total de Usuários",
+                label="Total of Users",
                 value=12543,
                 change=12.5,
                 trend="up",

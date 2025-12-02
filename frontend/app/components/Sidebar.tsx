@@ -20,7 +20,7 @@ export function Sidebar() {
             {/* Logo */}
             <div className="p-6 border-b border-[var(--glass-border)]">
                 <h1 className="text-2xl font-bold text-gradient">Dashboard AI</h1>
-                <p className="text-xs text-[var(--foreground-secondary)] mt-1">Analytics Platform</p>
+                <p className="text-xs text-[var(--foreground-secondary)] mt-1">Plataforma de Analytics</p>
             </div>
 
             {/* Navigation */}

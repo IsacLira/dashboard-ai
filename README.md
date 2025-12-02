@@ -24,5 +24,6 @@ cd backend
 source venv/bin/activate
 pip install -r requirements.txt
 pkill -9 -f uvicorn
+source /opt/miniconda3/etc/profile.d/conda.sh
 python -m uvicorn main:app --reload
 ```

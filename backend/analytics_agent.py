@@ -32,8 +32,8 @@ else:
 @tool
 def get_csv_metadata() -> str:
     """
-    Usada para obter o formato, colunas e tipos de dados (dtypes) do DataFrame.
-    O Agente DEVE usar esta ferramenta como primeira ação para entender a estrutura dos dados antes de escrever qualquer código de análise.
+    Used to get the format, columns, and data types (dtypes) of the DataFrame.
+    The Agent MUST use this tool as the first action to understand the data structure before writing any analysis code.
     """
     logger.info("Tool called: get_csv_metadata")
     logger.debug(f"DataFrame shape: {df.shape}, columns: {list(df.columns)}")
@@ -42,19 +42,19 @@ def get_csv_metadata() -> str:
 @tool
 def get_unique_values(column_name: str) -> str:
     """
-    Usada para obter os valores únicos de uma coluna específica do DataFrame.
+    Used to get the unique values of a specific DataFrame column.
     
-    IMPORTANTE:
-    - Use esta ferramenta ANTES de criar filtros para garantir o spelling EXATO dos valores.
-    - Exemplo: Para filtrar por categoria, primeiro chame get_unique_values("Category") para ver os valores disponíveis.
-    - Isso evita erros de digitação como "Technology" vs "Tecnologia" ou "Consumer" vs "Consumidor".
-    - Sempre use os valores EXATOS retornados por esta ferramenta nos seus filtros.
+    IMPORTANT:
+    - Use this tool BEFORE creating filters to ensure EXACT spelling of values.
+    - Example: To filter by category, first call get_unique_values("Category") to see available values.
+    - This avoids typos like "Technology" vs "Tecnologia" or "Consumer" vs "Consumidor".
+    - Always use the EXACT values returned by this tool in your filters.
     
     Args:
-        column_name: Nome exato da coluna (case-sensitive)
+        column_name: Exact column name (case-sensitive)
     
     Returns:
-        Lista de valores únicos encontrados na coluna
+        List of unique values found in the column
     """
     logger.info(f"Tool called: get_unique_values(column_name='{column_name}')")
     
@@ -62,7 +62,7 @@ def get_unique_values(column_name: str) -> str:
         if column_name not in df.columns:
             available_columns = ', '.join(df.columns)
             logger.warning(f"Column '{column_name}' not found. Available: {available_columns}")
-            return f"ERRO: Coluna '{column_name}' não existe. Colunas disponíveis: {available_columns}"
+            return f"ERROR: Column '{column_name}' does not exist. Available columns: {available_columns}"
         
         unique_vals = df[column_name].unique()
         unique_count = len(unique_vals)
@@ -71,27 +71,27 @@ def get_unique_values(column_name: str) -> str:
         if unique_count > 50:
             sample_vals = unique_vals[:50]
             logger.info(f"Column '{column_name}' has {unique_count} unique values (showing first 50)")
-            return f"Coluna '{column_name}' possui {unique_count} valores únicos.\n\nPrimeiros 50 valores:\n{list(sample_vals)}\n\n(Use estes valores EXATOS ao criar filtros)"
+            return f"Column '{column_name}' has {unique_count} unique values.\n\nFirst 50 values:\n{list(sample_vals)}\n\n(Use these EXACT values when creating filters)"
         else:
             logger.info(f"Column '{column_name}' has {unique_count} unique values")
-            return f"Coluna '{column_name}' possui {unique_count} valores únicos:\n\n{list(unique_vals)}\n\n(Use estes valores EXATOS ao criar filtros)"
+            return f"Column '{column_name}' has {unique_count} unique values:\n\n{list(unique_vals)}\n\n(Use these EXACT values when creating filters)"
     
     except Exception as e:
         logger.error(f"Error getting unique values: {str(e)}")
-        return f"Erro ao obter valores únicos: {str(e)}"
+        return f"Error getting unique values: {str(e)}"
 
 
 @tool
 def execute_python_analysis(code: str) -> str:
     """
-    Usada exclusivamente para executar código Python de análise e ou transformação.
+    Used exclusively to execute Python analysis and/or transformation code.
     
-    IMPORTANTE: 
-    - O código deve operar sobre a variável global `df`.
-    - O resultado final da análise (número, tabela, string, etc.) DEVE ser armazenado em uma variável chamada `result`.
-    - Se você precisar de bibliotecas adicionais (datetime, numpy, etc), INCLUA os imports no código.
-    - Exemplo simples: `result = df['coluna'].mean()`
-    - Exemplo com import: `from datetime import datetime\nresult = df[df['Date'] >= datetime(2016, 1, 1)]['Sales'].sum()`
+    IMPORTANT: 
+    - The code must operate on the global variable `df`.
+    - The final analysis result (number, table, string, etc.) MUST be stored in a variable called `result`.
+    - If you need additional libraries (datetime, numpy, etc), INCLUDE the imports in the code.
+    - Simple example: `result = df['column'].mean()`
+    - Example with import: `from datetime import datetime\nresult = df[df['Date'] >= datetime(2016, 1, 1)]['Sales'].sum()`
     """
     logger.info("-"*80)
     logger.info("TOOL: execute_python_analysis")
@@ -118,16 +118,16 @@ def execute_python_analysis(code: str) -> str:
             logger.info(f"RESULT TYPE: {type(result).__name__}")
             logger.info(f"RESULT VALUE: {str(result)[:500]}")
             logger.info("-"*80)
-            return f"Resultado da análise tabular: {result}. \n\nCOM BASE NESTE RESULTADO, GERE UM RESUMO TEXTUAL EXPLICATIVO PARA O USUÁRIO."
+            return f"Analysis result: {result}. \n\nBASED ON THIS RESULT, GENERATE AN EXPLANATORY TEXT SUMMARY FOR THE USER."
         
         logger.warning("CODE EXECUTION: Code executed but 'result' variable not defined")
-        return "Código executado com sucesso, mas a variável 'result' não foi definida. Por favor, reescreva o código para armazenar o resultado final em 'result'."
+        return "Code executed successfully, but the 'result' variable was not defined. Please rewrite the code to store the final result in 'result'."
 
     except Exception as e:
         logger.error(f"CODE EXECUTION: FAILED")
         logger.error(f"ERROR: {str(e)}")
         logger.debug(f"Failed code:\n{code}")
-        return f"Erro na execução do código: {str(e)}"
+        return f"Error executing code: {str(e)}"
 
 tools = [get_csv_metadata, get_unique_values, execute_python_analysis]
 
@@ -207,7 +207,7 @@ Observation: the result of the action
 ... (this Thought/Action/Action Input/Observation can repeat N times)
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question
-
+The response should be in ENGLLISH.
 Begin!
 
 Question: {{input}}
@@ -223,7 +223,7 @@ final_prompt = template.replace("{tools}", tool_strings)
 final_prompt = final_prompt.replace("{tool_names}", tool_names)
 final_prompt = final_prompt.replace("{input}", "the user's request")
 final_prompt = final_prompt.replace("{agent_scratchpad}", "")
-final_prompt = f"CATÁLOGO DE DADOS:\n{catalog}\n\n{final_prompt}"
+final_prompt = f"DATA CATALOG:\n{catalog}\n\n{final_prompt}"
 
 # Create agent using LangGraph
 # We don't pass state_modifier here to avoid version issues, we pass it in invoke
@@ -231,7 +231,7 @@ agent = create_react_agent(llm, tools)
 
 def get_analytics_response(query: str) -> str:
     """
-    Processa uma query do usuário utilizando o agente de analytics.
+    Processes a user query using the analytics agent.
     """
     logger.info("="*80)
     logger.info(f"USER INPUT: {query}")
@@ -256,7 +256,7 @@ def get_analytics_response(query: str) -> str:
         messages_list = result.get("messages", [])
         if not messages_list:
             logger.warning("No messages returned from agent")
-            return "Desculpe, não consegui processar sua solicitação."
+            return "Sorry, I couldn't process your request."
         print("AQUI")
         print(messages_list)
         # Get last message with content
@@ -293,8 +293,8 @@ def get_analytics_response(query: str) -> str:
                 return content_str
         
         logger.warning("No valid content found in agent messages")
-        return "Desculpe, não consegui gerar uma resposta."
+        return "Sorry, I couldn't generate a response."
             
     except Exception as e:
         logger.error(f"AGENT RESPONSE: FAILED - {str(e)}", exc_info=True)
-        return f"Erro ao processar sua solicitação: {str(e)}"
+        return f"Error processing your request: {str(e)}"

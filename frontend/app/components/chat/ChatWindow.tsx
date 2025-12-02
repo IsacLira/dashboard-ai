@@ -107,7 +107,7 @@ export function ChatWindow({ isOpen, messages, isTyping, onClose, onSendMessage 
                                         transition={{ delay: 0.3 }}
                                         className="text-sm text-slate-600 max-w-xs leading-relaxed"
                                     >
-                                        Sou seu agente de analytics. Posso ajudar você a analisar dados, gerar insights e responder perguntas sobre o dataset.
+                                        I'm your analytics agent. I can help you analyze data, generate insights, and answer questions about the dataset.
                                     </motion.p>
                                     <motion.div
                                         initial={{ y: 10, opacity: 0 }}
@@ -116,7 +116,7 @@ export function ChatWindow({ isOpen, messages, isTyping, onClose, onSendMessage 
                                         className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100"
                                     >
                                         <p className="text-xs text-blue-700 font-medium">
-                                            💡 Experimente perguntar sobre vendas, clientes ou produtos!
+                                            💡 You can ask about sales, customers, or products!
                                         </p>
                                     </motion.div>
                                 </div>

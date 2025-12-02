@@ -33,7 +33,7 @@ export function DataTable({
                 <CardHeader>
                     <CardTitle className="text-slate-800 flex items-center gap-2">
                         <Database className="w-5 h-5 text-blue-500" />
-                        Data Preview
+                        Data Visualization
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -51,10 +51,10 @@ export function DataTable({
                 <div className="flex items-center justify-between">
                     <CardTitle className="text-slate-800 flex items-center gap-2">
                         <Database className="w-5 h-5 text-blue-500" />
-                        Data Preview
+                        Data Visualization
                     </CardTitle>
                     <span className="text-sm text-slate-500">
-                        {total.toLocaleString()} total rows
+                        {total.toLocaleString()} Total Rows
                     </span>
                 </div>
             </CardHeader>
@@ -105,7 +105,7 @@ export function DataTable({
                     <div className="text-sm text-slate-600">
                         Showing <span className="font-semibold">{startRow}</span> to{' '}
                         <span className="font-semibold">{endRow}</span> of{' '}
-                        <span className="font-semibold">{total.toLocaleString()}</span> rows
+                        <span className="font-semibold">{total.toLocaleString()}</span> linhas
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -136,8 +136,8 @@ export function DataTable({
                                         key={i}
                                         onClick={() => onPageChange(pageNum)}
                                         className={`px-3 py-2 rounded-lg border transition-colors ${currentPage === pageNum
-                                                ? 'bg-blue-500 text-white border-blue-500'
-                                                : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                                            ? 'bg-blue-500 text-white border-blue-500'
+                                            : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                                             }`}
                                     >
                                         {pageNum}

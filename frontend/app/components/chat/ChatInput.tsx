@@ -41,7 +41,7 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder=".    Digite sua mensagem..."
+                    placeholder=".    Type your message..."
                     disabled={disabled || isTyping}
                     rows={1}
                     className="w-96 h-16 flex-1 resize-none bg-slate-50 text-slate-900 text-sm placeholder-slate-400 rounded-xl px-4 py-3 pl-12 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"

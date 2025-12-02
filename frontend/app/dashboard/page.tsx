@@ -86,7 +86,7 @@ export default function DashboardPage() {
 
     return (
         <>
-            <Header title="Dashboard" subtitle="Visão geral das suas métricas" />
+            <Header title="Dashboard" subtitle="All Metrics" />
 
             <main className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
                 <div className="max-w-7xl mx-auto space-y-16">
@@ -120,7 +120,7 @@ export default function DashboardPage() {
                                 <CardHeader>
                                     <CardTitle className="text-slate-800 flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-blue-500" />
-                                        Receita ao Longo do Tempo
+                                        Revenue Over Time
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
                                 <CardHeader>
                                     <CardTitle className="text-slate-800 flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-indigo-500" />
-                                        Clientes Únicos por Mês
+                                        Unique Customers per Month
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -159,11 +159,11 @@ export default function DashboardPage() {
                                 <div className="flex items-center justify-between">
                                     <CardTitle className="text-slate-800 flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                                        Atividade Recente
+                                        Recent Activities
                                     </CardTitle>
                                     <button className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors hover:scale-105 transform duration-200">
                                         <RefreshCw className="w-4 h-4" />
-                                        Atualizar
+                                        Update
                                     </button>
                                 </div>
                             </CardHeader>
