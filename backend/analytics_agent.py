@@ -118,7 +118,7 @@ def execute_python_analysis(code: str) -> str:
             logger.info(f"RESULT TYPE: {type(result).__name__}")
             logger.info(f"RESULT VALUE: {str(result)[:500]}")
             logger.info("-"*80)
-            return f"Analysis result: {result}. \n\nBASED ON THIS RESULT, GENERATE AN EXPLANATORY TEXT SUMMARY FOR THE USER."
+            return f"Analysis result: {result}. \n\n"#BASED ON THIS RESULT, GENERATE AN EXPLANATORY TEXT SUMMARY FOR THE USER."
         
         logger.warning("CODE EXECUTION: Code executed but 'result' variable not defined")
         return "Code executed successfully, but the 'result' variable was not defined. Please rewrite the code to store the final result in 'result'."
@@ -164,7 +164,7 @@ CRITICAL INSTRUCTIONS:
    - Percentages: % (e.g., 15.5%)
    - Large numbers: Use thousand separators (1.234) or abbreviations (1.5K, 2.3M)
    - Dates: Use clear format (DD/MM/YYYY or "Janeiro 2024")
-   - Quantities: Include unit (items, clientes, pedidos, produtos, etc.)
+   - Quantities: Include unit (items, clients, orders, products, etc.)
 7. Format numbers for readability:
    - Round currency to 2 decimals
    - Use commas for thousands
@@ -180,6 +180,7 @@ ABSOLUTE RULES - NO EXCEPTIONS:
 14. When generating Python code, INCLUDE necessary imports (datetime, numpy, etc) if needed.
 15. BEFORE creating filters on categorical columns (Category, Segment, Region, etc), ALWAYS use get_unique_values to verify the EXACT spelling of values.
 
+When you have all responses ready, GENERATE AN EXPLANATORY TEXT SUMMARY FOR THE USER.
 Example of CORRECT behavior:
 - Tool returns: "Total sales: 2297200.86"
 - Your answer: "A receita total é R$ 2.297.200,86"
@@ -258,7 +259,7 @@ def get_analytics_response(query: str) -> str:
             logger.warning("No messages returned from agent")
             return "Sorry, I couldn't process your request."
         print("AQUI")
-        print(messages_list)
+        print(len(messages_list))
         # Get last message with content
         for msg in reversed(messages_list):
             # Log reasoning/thinking if available (Gemini 2.5 Pro feature)

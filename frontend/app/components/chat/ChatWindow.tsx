@@ -99,7 +99,7 @@ export function ChatWindow({ isOpen, messages, isTyping, onClose, onSendMessage 
                                         transition={{ delay: 0.2 }}
                                         className="text-xl font-bold text-slate-900 mb-3"
                                     >
-                                        Olá! 👋
+                                        Hi!
                                     </motion.h4>
                                     <motion.p
                                         initial={{ y: 10, opacity: 0 }}

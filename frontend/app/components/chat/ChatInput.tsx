@@ -28,7 +28,7 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
     };
 
     return (
-        <div className="border-t border-slate-200/60 py-26 px-26 bg-white/80">
+        <div className="border-t border-slate-200/60 py-4 px-6 bg-white/80">
             {isTyping && (
                 <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
                     <Loader2 className="w-3 h-3 animate-spin" />
@@ -44,7 +44,7 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
                     placeholder=".    Type your message..."
                     disabled={disabled || isTyping}
                     rows={1}
-                    className="w-96 h-16 flex-1 resize-none bg-slate-50 text-slate-900 text-sm placeholder-slate-400 rounded-xl px-4 py-3 pl-12 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
+                    className="flex-1 resize-none bg-slate-50 text-slate-900 text-sm placeholder-slate-400 rounded-xl px-4 py-3 pl-12 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
                     style={{ minHeight: '48px' }}
                 />
 
