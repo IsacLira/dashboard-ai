@@ -14,7 +14,8 @@ interface ChatMessageProps {
 // Parse agent response to extract clean Final Answer
 function parseAgentResponse(content: string): string {
     // Extract Final Answer if present (agent output format)
-    const finalAnswerMatch = content.match(/Final Answer:\s*([\s\S]*?)(?:\n\n|$)/);
+    // Capture everything after "Final Answer:" until the end
+    const finalAnswerMatch = content.match(/Final Answer:\s*([\s\S]*?)$/);
     if (finalAnswerMatch) {
         return finalAnswerMatch[1].trim();
     }

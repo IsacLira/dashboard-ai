@@ -44,7 +44,7 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
                     placeholder="Digite sua mensagem..."
                     disabled={disabled || isTyping}
                     rows={1}
-                    className="flex-1 resize-none bg-slate-50 text-slate-900 placeholder-slate-400 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
+                    className="flex-1 resize-none bg-slate-50 text-slate-900 text-sm placeholder-slate-400 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
                     style={{ minHeight: '48px' }}
                 />
 
