@@ -67,7 +67,7 @@ export function ChatWindow({ isOpen, messages, isTyping, onClose, onSendMessage 
                                     <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-900">Agente Analytics</h3>
+                                    <h3 className="font-semibold text-slate-900">Analytics Agent</h3>
                                     <p className="text-xs text-emerald-600 font-medium">Online</p>
                                 </div>
                             </div>
