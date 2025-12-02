@@ -57,7 +57,7 @@ export function ChatWindow({ isOpen, messages, isTyping, onClose, onSendMessage 
                         }}
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-4 border-b border-slate-200/60 bg-gradient-to-r from-blue-50/80 to-indigo-50/80">
+                        <div className="flex items-center justify-between p-6 border-b border-slate-200/60 bg-gradient-to-r from-blue-50/80 to-indigo-50/80">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
                                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">

@@ -286,7 +286,7 @@ def get_analytics_response(query: str) -> str:
                 logger.info("="*80)
                 logger.info("AGENT RESPONSE: SUCCESS")
                 logger.info(f"Response length: {len(content_str)} characters, {len(content_str.split())} words")
-                logger.info(f"Response preview (first 300 chars):\n{content_str[:300]}...")
+                # logger.info(f"Response preview (first 300 chars):\n{content_str[:300]}...")
                 logger.info(f"Full response:\n{content_str}")
                 logger.info("="*80)
                 return content_str

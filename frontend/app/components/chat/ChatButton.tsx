@@ -12,20 +12,7 @@ interface ChatButtonProps {
 export function ChatButton({ isOpen, hasUnread, onClick }: ChatButtonProps) {
     return (
         <div className="fixed bottom-6 right-6 z-50">
-            {/* Tooltip */}
-            <AnimatePresence>
-                {!isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 10 }}
-                        className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-slate-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap pointer-events-none"
-                    >
-                        Pergunte ao Analytics AI
-                        <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-900" />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Tooltip removed */}
 
             {/* Pulse ring for unread */}
             <AnimatePresence>

@@ -30,8 +30,8 @@ export function MetricCard({ metric, className }: MetricCardProps) {
                 </div>
             </div>
 
-            <div className="flex items-baseline gap-3">
-                <h3 className="text-3xl font-bold text-slate-900">
+            <div className="flex flex-col items-center justify-center gap-2 mt-2">
+                <h3 className="text-lg font-bold text-slate-900">
                     {typeof value === 'number' ? formatNumber(value) : value}
                 </h3>
 

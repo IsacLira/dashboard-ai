@@ -6,58 +6,80 @@ import { Header } from '@/components/Header';
 import { MetricCard } from '@/components/MetricCard';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/Card';
 import { Chart } from '@/components/Chart';
-import { useDashboardData } from '@/lib/hooks/useDashboardData'; // This import was in the original but not in the provided snippet, keeping it as per instruction to keep pre-existing comments/empty lines that are not explicitly removed by the change.
-import { Loader2, RefreshCw, TrendingUp, Users, DollarSign, Activity } from 'lucide-react';
+import { DataTable } from '@/components/DataTable';
+import { Loader2, RefreshCw, TrendingUp, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Mock data for demonstration
-const mockMetrics = [
-    { id: '1', label: 'Total de Usuários', value: 12543, change: 12.5, trend: 'up' as const, color: 'primary' as const },
-    { id: '2', label: 'Receita Mensal', value: 'R$ 45.2K', change: 8.3, trend: 'up' as const, color: 'success' as const },
-    { id: '3', label: 'Taxa de Conversão', value: '3.24%', change: -2.1, trend: 'down' as const, color: 'warning' as const },
-    { id: '4', label: 'Engajamento', value: '68.5%', change: 5.7, trend: 'up' as const, color: 'secondary' as const },
-];
-
-const mockChartData = [
-    { name: 'Jan', value: 4000, usuarios: 2400 },
-    { name: 'Fev', value: 3000, usuarios: 1398 },
-    { name: 'Mar', value: 2000, usuarios: 9800 },
-    { name: 'Abr', value: 2780, usuarios: 3908 },
-    { name: 'Mai', value: 1890, usuarios: 4800 },
-    { name: 'Jun', value: 2390, usuarios: 3800 },
-    { name: 'Jul', value: 3490, usuarios: 4300 },
-];
-
-const mockRecentActivity = [
-    { id: '1', title: 'Novo usuário registrado', description: 'João Silva criou uma conta', timestamp: new Date(Date.now() - 1000 * 60 * 5), type: 'info' as const },
-    { id: '2', title: 'Análise concluída', description: 'Relatório de vendas Q2 2024', timestamp: new Date(Date.now() - 1000 * 60 * 15), type: 'success' as const },
-    { id: '3', title: 'Alerta de performance', description: 'Tempo de resposta acima do normal', timestamp: new Date(Date.now() - 1000 * 60 * 30), type: 'warning' as const },
-];
+const API_BASE_URL = 'http://localhost:8000';
 
 export default function DashboardPage() {
-    // In production, this would fetch real data
-    // const { data, isLoading, error, refetch } = useDashboardData();
-
     const [mounted, setMounted] = useState(false);
-    const [data, setData] = useState<{
-        metrics: typeof mockMetrics;
-        chartData: typeof mockChartData;
-        recentActivity: typeof mockRecentActivity;
-    } | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<any>(null);
+
+    // Data preview state
+    const [previewData, setPreviewData] = useState<any[]>([]);
+    const [previewColumns, setPreviewColumns] = useState<string[]>([]);
+    const [previewTotal, setPreviewTotal] = useState(0);
+    const [previewPage, setPreviewPage] = useState(1);
+    const [previewLoading, setPreviewLoading] = useState(true);
+    const pageSize = 10;
 
     useEffect(() => {
         setMounted(true);
-        setData({
-            metrics: mockMetrics,
-            chartData: mockChartData,
-            recentActivity: mockRecentActivity,
-        });
+        fetchDashboardData();
+        fetchPreviewData(1);
     }, []);
 
-    if (!mounted || !data) {
+    const fetchDashboardData = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${API_BASE_URL}/api/dashboard/metrics`);
+            const result = await response.json();
+            setData(result);
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchPreviewData = async (page: number) => {
+        try {
+            setPreviewLoading(true);
+            const skip = (page - 1) * pageSize;
+            const response = await fetch(`${API_BASE_URL}/api/dashboard/preview?skip=${skip}&limit=${pageSize}`);
+            const result = await response.json();
+
+            if (!result.error) {
+                setPreviewData(result.data);
+                setPreviewColumns(result.columns);
+                setPreviewTotal(result.total);
+                setPreviewPage(page);
+            }
+        } catch (error) {
+            console.error('Error fetching preview data:', error);
+        } finally {
+            setPreviewLoading(false);
+        }
+    };
+
+    const handlePageChange = (page: number) => {
+        fetchPreviewData(page);
+    };
+
+    if (!mounted || loading) {
         return (
             <div className="flex-1 flex items-center justify-center">
                 <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+            </div>
+        );
+    }
+
+    if (!data) {
+        return (
+            <div className="flex-1 flex items-center justify-center">
+                <p className="text-slate-600">Failed to load dashboard data</p>
             </div>
         );
     }
@@ -67,15 +89,15 @@ export default function DashboardPage() {
             <Header title="Dashboard" subtitle="Visão geral das suas métricas" />
 
             <main className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-                <div className="max-w-7xl mx-auto space-y-12">
+                <div className="max-w-7xl mx-auto space-y-16">
                     {/* Metrics Grid */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
                     >
-                        {data.metrics.map((metric, index) => (
+                        {data.metrics.map((metric: any, index: number) => (
                             <motion.div
                                 key={metric.id}
                                 initial={{ opacity: 0, y: 20 }}
@@ -88,7 +110,7 @@ export default function DashboardPage() {
                     </motion.div>
 
                     {/* Charts Section */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -116,7 +138,7 @@ export default function DashboardPage() {
                                 <CardHeader>
                                     <CardTitle className="text-slate-800 flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-indigo-500" />
-                                        Crescimento de Usuários
+                                        Clientes Únicos por Mês
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -181,6 +203,23 @@ export default function DashboardPage() {
                                 </div>
                             </CardContent>
                         </Card>
+                    </motion.div>
+
+                    {/* Data Preview Section */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                    >
+                        <DataTable
+                            data={previewData}
+                            columns={previewColumns}
+                            total={previewTotal}
+                            currentPage={previewPage}
+                            pageSize={pageSize}
+                            onPageChange={handlePageChange}
+                            loading={previewLoading}
+                        />
                     </motion.div>
                 </div>
             </main>
