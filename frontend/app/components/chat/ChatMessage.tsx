@@ -11,9 +11,42 @@ interface ChatMessageProps {
     message: ChatMessageType;
 }
 
+// Parse agent response to extract clean Final Answer
+function parseAgentResponse(content: string): string {
+    // Extract Final Answer if present (agent output format)
+    const finalAnswerMatch = content.match(/Final Answer:\s*([\s\S]*?)(?:\n\n|$)/);
+    if (finalAnswerMatch) {
+        return finalAnswerMatch[1].trim();
+    }
+
+    // If no Final Answer found, check if content contains agent logs
+    // If it does, try to extract just the meaningful part
+    if (content.includes('Thought:') || content.includes('Action:') || content.includes('Observation:')) {
+        // Try to find the last meaningful text before agent logs
+        const lines = content.split('\n');
+        const cleanLines = lines.filter(line =>
+            !line.trim().startsWith('Thought:') &&
+            !line.trim().startsWith('Action:') &&
+            !line.trim().startsWith('Action Input:') &&
+            !line.trim().startsWith('Observation:') &&
+            line.trim().length > 0
+        );
+
+        if (cleanLines.length > 0) {
+            return cleanLines.join('\n').trim();
+        }
+    }
+
+    // Fallback: return content as-is
+    return content;
+}
+
 export function ChatMessageBubble({ message }: ChatMessageProps) {
     const isUser = message.role === 'user';
     const { content, timestamp } = message;
+
+    // Parse agent responses to show clean output
+    const displayContent = isUser ? content : parseAgentResponse(content);
 
     return (
         <motion.div
@@ -51,7 +84,7 @@ export function ChatMessageBubble({ message }: ChatMessageProps) {
                             "prose-td:p-2 prose-td:border prose-td:border-slate-200 prose-td:text-slate-600"
                         )}>
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                                {content}
+                                {displayContent}
                             </ReactMarkdown>
                         </div>
                     </div>

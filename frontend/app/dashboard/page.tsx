@@ -66,8 +66,8 @@ export default function DashboardPage() {
         <>
             <Header title="Dashboard" subtitle="Visão geral das suas métricas" />
 
-            <main className="flex-1 overflow-y-auto p-8 bg-slate-50/50">
-                <div className="max-w-7xl mx-auto space-y-8">
+            <main className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+                <div className="max-w-7xl mx-auto space-y-12">
                     {/* Metrics Grid */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -94,9 +94,12 @@ export default function DashboardPage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
-                            <Card className="h-full border-slate-100 shadow-sm">
+                            <Card className="h-full border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
                                 <CardHeader>
-                                    <CardTitle className="text-slate-800">Receita ao Longo do Tempo</CardTitle>
+                                    <CardTitle className="text-slate-800 flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-blue-500" />
+                                        Receita ao Longo do Tempo
+                                    </CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <Chart data={data.chartData} type="area" dataKey="value" height={300} color="#6366f1" />
@@ -109,9 +112,12 @@ export default function DashboardPage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.5 }}
                         >
-                            <Card className="h-full border-slate-100 shadow-sm">
+                            <Card className="h-full border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
                                 <CardHeader>
-                                    <CardTitle className="text-slate-800">Crescimento de Usuários</CardTitle>
+                                    <CardTitle className="text-slate-800 flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                                        Crescimento de Usuários
+                                    </CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <Chart data={data.chartData} type="bar" dataKey="usuarios" height={300} color="#3b82f6" />
@@ -126,18 +132,21 @@ export default function DashboardPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                     >
-                        <Card className="border-slate-100 shadow-sm">
+                        <Card className="border-slate-200/60 shadow-lg bg-white/80 backdrop-blur-sm">
                             <CardHeader>
                                 <div className="flex items-center justify-between">
-                                    <CardTitle className="text-slate-800">Atividade Recente</CardTitle>
-                                    <button className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors">
+                                    <CardTitle className="text-slate-800 flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                        Atividade Recente
+                                    </CardTitle>
+                                    <button className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors hover:scale-105 transform duration-200">
                                         <RefreshCw className="w-4 h-4" />
                                         Atualizar
                                     </button>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="space-y-1">
+                                <div className="space-y-2">
                                     {data.recentActivity.map((activity) => {
                                         const iconMap = {
                                             info: Activity,
@@ -148,19 +157,19 @@ export default function DashboardPage() {
                                         const Icon = iconMap[activity.type];
 
                                         const colorMap = {
-                                            info: 'bg-blue-50 text-blue-600',
-                                            success: 'bg-emerald-50 text-emerald-600',
-                                            warning: 'bg-orange-50 text-orange-600',
-                                            error: 'bg-red-50 text-red-600',
+                                            info: 'bg-blue-50 text-blue-600 border-blue-100',
+                                            success: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                            warning: 'bg-orange-50 text-orange-600 border-orange-100',
+                                            error: 'bg-red-50 text-red-600 border-red-100',
                                         };
 
                                         return (
-                                            <div key={activity.id} className="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors duration-200 group">
-                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${colorMap[activity.type]}`}>
+                                            <div key={activity.id} className="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50/80 transition-all duration-200 group cursor-pointer border border-transparent hover:border-slate-200">
+                                                <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border ${colorMap[activity.type]} group-hover:scale-110 transition-transform duration-200`}>
                                                     <Icon className="w-5 h-5" />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <p className="text-sm font-semibold text-slate-900">{activity.title}</p>
+                                                    <p className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{activity.title}</p>
                                                     <p className="text-sm text-slate-500 truncate">{activity.description}</p>
                                                 </div>
                                                 <span className="text-xs font-medium text-slate-400 group-hover:text-slate-600 transition-colors whitespace-nowrap px-2">

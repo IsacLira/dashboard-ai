@@ -28,15 +28,15 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
     };
 
     return (
-        <div className="border-t border-[var(--glass-border)] p-4 bg-[var(--background-secondary)]">
+        <div className="border-t border-slate-200/60 p-6 bg-white/80">
             {isTyping && (
-                <div className="flex items-center gap-2 text-sm text-[var(--foreground-secondary)] mb-2">
+                <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
                     <Loader2 className="w-3 h-3 animate-spin" />
                     <span>Agente está digitando...</span>
                 </div>
             )}
 
-            <div className="flex gap-2 items-end">
+            <div className="flex gap-3 items-end">
                 <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -44,8 +44,8 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
                     placeholder="Digite sua mensagem..."
                     disabled={disabled || isTyping}
                     rows={1}
-                    className="flex-1 resize-none bg-[var(--background-tertiary)] text-[var(--foreground)] placeholder-[var(--foreground-tertiary)] rounded-lg px-4 py-2.5 border border-[var(--glass-border)] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
-                    style={{ minHeight: '42px' }}
+                    className="flex-1 resize-none bg-slate-50 text-slate-900 placeholder-slate-400 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed max-h-32"
+                    style={{ minHeight: '48px' }}
                 />
 
                 <motion.button
@@ -53,14 +53,14 @@ export function ChatInput({ onSend, isTyping, disabled = false }: ChatInputProps
                     disabled={!message.trim() || disabled || isTyping}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex-shrink-0 w-10 h-10 rounded-lg gradient-primary flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:ring-offset-2 focus:ring-offset-[var(--background-secondary)]"
+                    className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     aria-label="Enviar mensagem"
                 >
-                    <Send className="w-4 h-4 text-white" />
+                    <Send className="w-5 h-5 text-white" />
                 </motion.button>
             </div>
 
-            <p className="text-xs text-[var(--foreground-tertiary)] mt-2">
+            <p className="text-xs text-slate-500 mt-3 mb-1">
                 Pressione Enter para enviar, Shift+Enter para nova linha
             </p>
         </div>
