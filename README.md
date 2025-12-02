@@ -23,5 +23,6 @@ npm run dev
 cd backend
 source venv/bin/activate
 pip install -r requirements.txt
+pkill -9 -f uvicorn
 python -m uvicorn main:app --reload
 ```

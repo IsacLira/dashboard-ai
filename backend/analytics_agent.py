@@ -160,7 +160,7 @@ CRITICAL INSTRUCTIONS:
 4. Your workflow must be: get_csv_metadata -> [get_unique_values if filtering] -> execute_python_analysis -> Final Answer.
 5. NEVER say "I need to understand what you want". Assume the user wants the answer to their question.
 6. ALWAYS include appropriate units in your answers:
-   - Currency: R$ (Reais) with thousand separators (e.g., R$ 1.234,56)
+   - Currency: $ (Dolars) with thousand separators (e.g., $ 1.234,56)
    - Percentages: % (e.g., 15.5%)
    - Large numbers: Use thousand separators (1.234) or abbreviations (1.5K, 2.3M)
    - Dates: Use clear format (DD/MM/YYYY or "Janeiro 2024")
@@ -189,9 +189,9 @@ Example of CORRECT code with imports:
 
 Example of INCORRECT behavior (FORBIDDEN):
 - Tool returns: Error or no data
-- Your answer: "Estimando com base em padrões típicos..." ❌ NEVER DO THIS
-- Your answer: "A receita é aproximadamente..." ❌ NEVER DO THIS
-- Your answer: "Baseado em dados similares..." ❌ NEVER DO THIS
+- Your answer: "Estimando com base em padrões típicos..."  NEVER DO THIS
+- Your answer: "A receita é aproximadamente..."  NEVER DO THIS
+- Your answer: "Baseado em dados similares..."  NEVER DO THIS
 
 Answer the following questions as best you can. You have access to the following tools:
 
@@ -257,7 +257,8 @@ def get_analytics_response(query: str) -> str:
         if not messages_list:
             logger.warning("No messages returned from agent")
             return "Desculpe, não consegui processar sua solicitação."
-        
+        print("AQUI")
+        print(messages_list)
         # Get last message with content
         for msg in reversed(messages_list):
             # Log reasoning/thinking if available (Gemini 2.5 Pro feature)
